@@ -22,7 +22,7 @@ export default function BlogId({ blog }) {
 export const getStaticPaths = async () => {
   const data = await client.get({ endpoint: "blog" });
 
-  const paths = data.contents.map((content) => `/blog/${content.id}`);
+  const paths = data.contents.map((content) => `/preview/${content.id}`);
   return { paths, fallback: false };
 };
 
@@ -42,7 +42,7 @@ export const getStaticProps = async (context) => {
   });
 
    // 記事が存在しなければ404エラーを返す
-   if (!blogPost) {
+   if (!data) {
     return { notFound: true }
   }
 
